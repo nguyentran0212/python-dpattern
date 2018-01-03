@@ -6,6 +6,9 @@ Created on Fri Dec 29 16:07:51 2017
 @author: nguyentran
 
 Factory method pattern
+Essentially, factory method pattern means providing a method to handle object 
+instantiation instead of calling constructors
+
 This pattern allows a parent abstract class to defer the instantiation process to its subclasses
 The parent class knows when an object must be created, but it does not know which class to use
 to create the object. 
@@ -50,12 +53,17 @@ class AbstractApplication(ABC):
     def __init__(self):
         """
         Create a product by using the factory method.
-        It should be noted that the product needs not to be created here
+        It should be noted that the product needs not to be created here in the 
+        constructor. This is just for demonstration
         """
         self.product = self._factory_method()
     
     """
-    This abstract method returns a product object
+    This abstract method returns a product object. Whenever we need a new object
+    of this class hierarchy, instead of calling constructor, which we have no
+    idea which one to use at the design time, we call this function. Concrete
+    application classes will implement this abstract class with concrete 
+    creation method
     """
     @abstractmethod
     def _factory_method(self):
